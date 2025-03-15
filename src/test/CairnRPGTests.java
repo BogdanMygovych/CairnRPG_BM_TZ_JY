@@ -5,7 +5,8 @@ public class CairnRPGTests {
 
     @Test
     void testWorldDefaults() {
-
+        World world = new World();
+        assertNotNull(world.info());
     }
 
     @Test
