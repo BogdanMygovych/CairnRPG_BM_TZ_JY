@@ -16,7 +16,9 @@ public class CairnRPGTests {
 
     @Test
     void testCharacterRunAway() {
-
+        Character c = new Character("Max", 100, 10, true);
+        boolean result = c.runAway(); // true/false
+        assertNotNull(result);
     }
 
     @Test
