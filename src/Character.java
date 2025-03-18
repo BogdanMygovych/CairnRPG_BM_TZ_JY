@@ -22,4 +22,30 @@ public class Character {
     }
 
 }
+ // 🛠️ **Added these getter methods for testing**
+    public String getName() {
+        return name;
+    }
+
+    public double getHealth() {
+        return health;
+    }
+
+    public double getAttackPower() {
+        return attackPower;
+    }
+
+    public boolean getIsAlive() {
+        return isAlive;
+    }
+
+    // 🛠️ **Setter method to allow modification in tests**
+    public void setAlive(boolean status) {
+        this.isAlive = status;
+    }
+
+    public String info() {
+        return "Name: " + name + ", Health: " + health + ", Attack: " + attackPower + ", Alive: " + isAlive;
+    }
+}
 
