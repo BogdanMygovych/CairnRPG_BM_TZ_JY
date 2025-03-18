@@ -1,48 +1,36 @@
 import java.util.Random;
 
 public class Enemy extends Character {
-    private static final String DEFAULT_NAME = "Enemy"; //enemy
-    private int magicPower = 30;
-    private Random randomizer = new Random();
+    private int magicPoints;
 
-    // Constructor 1
-    public Enemy(double health, double attackPower, boolean isAlive) {
-        super(DEFAULT_NAME, health, attackPower, isAlive); // gets the character
+    public Enemy(float health, float attackPower, boolean isAlive) {
+        super("KillerBalloonDog", health, attackPower, isAlive);
+        this.magicPoints = 30;
     }
 
-    // Constructor 2
     public Enemy() {
-        this(100.0, 10.0, true);
+        this(100.0f, 10.0f, true);
     }
 
-public void fight(Character target) {
-    if (!isAlive()) {
-        System.out.println(getName() + " is already defeated and can't attack!");
-        return;
+    public boolean fight(Hero hero) {
+        Random rand = new Random();
+        boolean useMagic = rand.nextBoolean() && magicPoints >= 10;
+
+        if (useMagic) {
+            magicPoints -= 10;
+            System.out.println(getName() + " shot a spell attack on " + hero.getName());
+        } else {
+            System.out.println(getName() + " attacked " + hero.getName() + " with a normal attack.");
+        }
+
+        return rand.nextInt(100) > 10;
     }
 
-    boolean useMagic = randomizer.nextDouble() < 0.3; // 30% for magic
-    double damage;
-
-    if (useMagic && magicPower >= 10) {
-        damage = getAttackPower() * 1.5; // More damage for magic
-        magicPower -= 10; // Reduce magic power
-        System.out.println(getName() + " casts a magic spell! Damage: " + damage);
-    } else { // Normal attack
-        damage = getAttackPower();
-        System.out.println(getName() + " attacks with a weapon! Damage: " + damage);
-    }
-
-    target.takeDamage(damage); // Apply damage to the target
-}
-
-
-    // Display enemy details
+    @Override
     public String info() {
-        return "Enemy: " + name +
-                "\nHealth: " + health +
-                "\nAttack Power: " + attackPower +
-                "\nMagic Power: " + magicPower +
-                "\nAlive: " + (isAlive ? "Yes" : "No");
+        return super.info() + ", Magic Points: " + magicPoints;
     }
+
+    public int getMagicPoints() { return magicPoints; }
+    public void setMagicPoints(int magicPoints) { this.magicPoints = magicPoints; }
 }
