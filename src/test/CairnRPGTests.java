@@ -18,7 +18,10 @@ public class CairnRPGTests {
 
     @Test
     void testItemCreationAndInfo() {
-
+        Item potion = new Item("Potion", 20);
+        assertEquals("Potion", potion.getName());
+        assertEquals(20, potion.getHealingPower());
+        assertTrue(potion.info().contains("Potion"));
     }
 
 
