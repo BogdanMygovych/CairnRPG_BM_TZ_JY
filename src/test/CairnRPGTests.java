@@ -26,14 +26,15 @@ public class CairnRPGTests {
         assertNotNull(result);
     }
 
-    @Test
-    void testItemCreationAndInfo() {
-       Item potion = new Item("Potion", 20);
+@Test
+void testItemCreationAndInfo() {
+    Item potion = new Item("Potion", 20);
 
-       assertEquals("Potion", Item.getName());
-       assertEquals(20, Item.getHealingPower());
-       assertEquals("This is " + Item.getName() + " and its healing power is " + Item.getHealingPower(), Item.info());
-    }
+    assertEquals("Potion", potion.getName());
+    assertEquals(20, potion.getHealingPower());
+    assertEquals("This is " + potion.getName() + " and its healing power is " + potion.getHealingPower(), potion.info());
+}
+
 
 
     @Test
@@ -62,10 +63,15 @@ public class CairnRPGTests {
         assertTrue(hero.showInventory().contains("Potion")); // should be false
     }
 
-    @Test
-    void testHeroFight() {
+   @Test
+void testHeroFight() {
+    Hero hero = new Hero(100.0F, 10.0F, true);
+    Enemy enemy = new Enemy(100.0, 10.0, true);
 
-    }
+    boolean attackSuccess = hero.fight(enemy);
+    assertTrue(attackSuccess);
+}
+
 
     @Test
     void testEnemyFightMagic() {
