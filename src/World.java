@@ -2,9 +2,9 @@ public class World {
     private String gameName;
     private String publisher;
 
-    public World() {
-        this.gameName = "Default Game";
-        this.publisher = "Default Publisher";
+   public World(String gameName, String publisher) {
+        this.gameName = gameName;
+        this.publisher = publisher;
     }
 
     public String getGameName() {
@@ -22,8 +22,5 @@ public class World {
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
-
-    public String info() {
-        return "Game: " + gameName + ", Publisher: " + publisher;
-    }
 }
+
