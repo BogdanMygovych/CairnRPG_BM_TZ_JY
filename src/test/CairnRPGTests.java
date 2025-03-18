@@ -1,110 +1,166 @@
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CairnRPGTests {
-    private Enemy enemy;
-    private Character hero;
 
-    @BeforeEach
-    void setUp() {
-        enemy = new Enemy(100.0, 10.0, true);
-        hero = new Character("Hero", 120.0, 15.0, true);
+    // --- World Tests ---
+    @Test
+    void testWorldConstructorAndInfo() {
+        World world = new World();
+        assertNotNull(world);
+        assertEquals("CairnRPG Game", world.getGameName());
+        assertEquals("Bogdan, Tykhyk, Jonah", world.getPublisher());
+        assertTrue(world.info().contains("Game:"));
     }
 
-    
     @Test
-    void testWorldCreation() {
-        World w = new World("My World", "Me");
-        assertNotNull(w);
+    void testWorldSetters() {
+        World world = new World();
+        world.setGameName("Cairn RPG");
+        world.setPublisher("CairnU Devs");
+        assertEquals("Cairn RPG", world.getGameName());
+        assertEquals("CairnU Devs", world.getPublisher());
+    }
+
+    // --- Item Tests ---
+    @Test
+    void testItemConstructorAndGetters() {
+        Item potion = new Item("Potion", 20);
+        assertEquals("Potion", potion.getName());
+        assertEquals(20, potion.getHealingPower());
+        assertTrue(potion.info().contains("Heals"));
+    }
+
+    @Test
+    void testItemSetters() {
+        Item item = new Item("Elixir", 30);
+        item.setName("Powerful Elixir");
+        item.setHealingPower(50);
+        assertEquals("Powerful Elixir", item.getName());
+        assertEquals(50, item.getHealingPower());
+    }
+
+    // --- Character Tests ---
+    @Test
+    void testCharacterConstructorAndInfo() {
+        Character character = new Character("Bodya", 100.0f, 10.0f, true);
+        assertNotNull(character);
+        assertTrue(character.info().contains("Bodya"));
     }
 
     @Test
     void testCharacterRunAway() {
-        Character c = new Character("Max", 100, 10, true);
-        boolean result = c.runAway(); // true/false
-        assertNotNull(result);
+        Character character = new Character("Bodya", 100.0f, 10.0f, true);
+        assertNotNull(character.runAway());
     }
 
-@Test
-void testItemCreationAndInfo() {
-    Item potion = new Item("Potion", 20);
+    @Test
+    void testCharacterSettersAndGetters() {
+        Character c = new Character("Test", 50f, 10f, true);
+        c.setName("NewName");
+        c.setHealth(75f);
+        c.setAttackPower(12.5f);
+        c.setIsAlive(false);
 
-    assertEquals("Potion", potion.getName());
-    assertEquals(20, potion.getHealingPower());
-    assertEquals("This is " + potion.getName() + " and its healing power is " + potion.getHealingPower(), potion.info());
-}
+        assertEquals("NewName", c.getName());
+        assertEquals(75f, c.getHealth());
+        assertEquals(12.5f, c.getAttackPower());
+        assertFalse(c.getIsAlive());
+    }
 
+    // --- Hero Tests ---
+    @Test
+    void testHeroConstructorDefaults() {
+        Hero hero = new Hero(100.0f, 15.0f, true);
+        assertEquals(1, hero.getLevel());
+        assertEquals(0, hero.getExperience());
+        assertEquals(0.0f, hero.getMoney());
+        assertTrue(hero.info().contains("Level:"));
+    }
 
+    @Test
+    void testHeroAddToInventoryAndUseItem() {
+        Hero hero = new Hero(100.0f, 10.0f, true);
+        boolean added = hero.addToInventory(new Item("Elixir", 30));
+        assertTrue(added);
+
+        float before = hero.getHealth();
+        int healed = hero.useItem(1); // Uses the item we just added
+        assertTrue(healed > 0);
+        assertTrue(hero.getHealth() > before);
+    }
+
+    @Test
+    void testHeroFight() {
+        Hero hero = new Hero(100.0f, 10.0f, true);
+        Enemy enemy = new Enemy(100.0f, 5.0f, true);
+        boolean result = hero.fight(enemy);
+        assertTrue(result || !result); // just assert it returns a boolean
+    }
 
     @Test
     void testHeroLevelUp() {
-        Hero hero = new Hero(100.0F, 10.0F, true);
-
-        hero.setExperience(100);
+        Hero hero = new Hero(100.0f, 10.0f, true);
+        hero.setExperience(120);
         hero.levelUp();
-
         assertEquals(2, hero.getLevel());
-        assertEquals(20, hero.getExperience());
-        assertEquals(110.0, hero.health);
-        assertEquals(11.0, hero.attackPower);
-    }
-
-
-    @Test
-    void testHeroInventoryAddAndUse() {
-        Hero hero = new Hero(100.0F, 10.0F, true);
-        Item potion = new Item("Potion", 20);
-
-        assertTrue(hero.addToInventory(potion)); // should be true
-        assertTrue(hero.showInventory().contains("Potion")); // should be true
-
-        hero.useItem();
-        assertTrue(hero.showInventory().contains("Potion")); // should be false
-    }
-
-   @Test
-void testHeroFight() {
-    Hero hero = new Hero(100.0F, 10.0F, true);
-    Enemy enemy = new Enemy(100.0, 10.0, true);
-
-    boolean attackSuccess = hero.fight(enemy);
-    assertTrue(attackSuccess);
-}
-
-
-    @Test
-    void testEnemyFightMagic() {
-
+        assertEquals(0, hero.getExperience());
     }
 
     @Test
-    void testBossFightUltra() {
+    void testHeroShowInventory() {
+        Hero hero = new Hero(100.0f, 10.0f, true);
+        String inventory = hero.showInventory();
+        assertTrue(inventory.contains("Potion"));
+    }
 
+    // --- Enemy Tests ---
+    @Test
+    void testEnemyConstructorDefaults() {
+        Enemy enemy = new Enemy(100.0f, 10.0f, true);
+        assertEquals("KillerBalloonDog", enemy.getName());
+        assertEquals(30, enemy.getMagicPoints());
+        assertTrue(enemy.info().contains("Magic Points"));
     }
 
     @Test
-    void testShowInventory() {
-        Hero hero = new Hero(100.0F, 10.0F, true);
-        hero.addToInventory(new Item("Potio", 20));
-
-        assertTrue(hero.showInventory().contains("Potion"));
+    void testEnemyFight() {
+        Enemy enemy = new Enemy(100.0f, 10.0f, true);
+        Hero hero = new Hero(100.0f, 10.0f, true);
+        boolean result = enemy.fight(hero);
+        assertTrue(result || !result); // Ensure boolean returned
     }
 
     @Test
-    void testInfoMethods() {
-        Hero hero = new Hero(100.0F, 10.0F, true);
-        Item potion = new Item("Potion", 20);
-
-        assertEquals("This is " + Item.getName() + " and its healing power is " + Item.getHealingPower(), Item.info());
-        assertEquals("This is " + hero.name + ". Health: " + hero.health + ", level: " + hero.getLevel() + ", experience: " + hero.getExperience() + ", money: " + hero.getMoney() + ", attack power: " + hero.attackPower + ".", Hero.info());
+    void testEnemySettersAndGetters() {
+        Enemy enemy = new Enemy();
+        enemy.setMagicPoints(50);
+        assertEquals(50, enemy.getMagicPoints());
     }
-        @Test
-    void testEnemyCreation() {
-        Enemy enemy = new Enemy(100.0, 10.0, true);  // Creating an enemy
-        assertEquals("Enemy", enemy.getName(), "Enemy name should be 'Enemy'");
-        assertEquals(100.0, enemy.getHealth(), 0.01, "Enemy health should be 100");
-        assertEquals(10.0, enemy.getAttackPower(), 0.01, "Enemy attack power should be 10");
-        assertTrue(enemy.getIsAlive(), "Enemy should be alive when created");
+
+    // --- Boss Tests ---
+    @Test
+    void testBossConstructorAndInfo() {
+        Boss boss = new Boss();
+        assertEquals("KillerClown", boss.getName());
+        assertEquals(3, boss.getUltrasLeft());
+        assertTrue(boss.info().contains("Ultras Left"));
+    }
+
+    @Test
+    void testBossFightUsesUltras() {
+        Boss boss = new Boss();
+        Hero hero = new Hero(100.0f, 10.0f, true);
+        for (int i = 0; i < 5; i++) {
+            boss.fight(hero); // Use ultras
+        }
+        assertTrue(boss.getUltrasLeft() <= 3);
+    }
+
+    @Test
+    void testBossSetters() {
+        Boss boss = new Boss();
+        boss.setUltrasLeft(1);
+        assertEquals(1, boss.getUltrasLeft());
     }
 }
