@@ -7,7 +7,7 @@ public class Item {
         this.healingPower = healingPower;
     }
 
-
+    // getters and setters
     public String getName() {
         return name;
     }
