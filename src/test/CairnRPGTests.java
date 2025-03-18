@@ -8,8 +8,8 @@ public class CairnRPGTests {
     void testWorldConstructorAndInfo() {
         World world = new World();
         assertNotNull(world);
-        assertEquals("Default Game", world.getGameName());
-        assertEquals("Default Publisher", world.getPublisher());
+        assertEquals("CairnRPG Game", world.getGameName());
+        assertEquals("Bogdan, Tykhyk, Jonah", world.getPublisher());
         assertTrue(world.info().contains("Game:"));
     }
 
@@ -17,9 +17,9 @@ public class CairnRPGTests {
     void testWorldSetters() {
         World world = new World();
         world.setGameName("Cairn RPG");
-        world.setPublisher("CU Devs");
+        world.setPublisher("CairnU Devs");
         assertEquals("Cairn RPG", world.getGameName());
-        assertEquals("CU Devs", world.getPublisher());
+        assertEquals("CairnU Devs", world.getPublisher());
     }
 
     // --- Item Tests ---
@@ -34,23 +34,23 @@ public class CairnRPGTests {
     @Test
     void testItemSetters() {
         Item item = new Item("Elixir", 30);
-        item.setName("Mega Elixir");
+        item.setName("Powerful Elixir");
         item.setHealingPower(50);
-        assertEquals("Mega Elixir", item.getName());
+        assertEquals("Powerful Elixir", item.getName());
         assertEquals(50, item.getHealingPower());
     }
 
     // --- Character Tests ---
     @Test
     void testCharacterConstructorAndInfo() {
-        Character character = new Character("Maximus", 100.0f, 10.0f, true);
+        Character character = new Character("Bodya", 100.0f, 10.0f, true);
         assertNotNull(character);
-        assertTrue(character.info().contains("Maximus"));
+        assertTrue(character.info().contains("Bodya"));
     }
 
     @Test
     void testCharacterRunAway() {
-        Character character = new Character("Maximus", 100.0f, 10.0f, true);
+        Character character = new Character("Bodya", 100.0f, 10.0f, true);
         assertNotNull(character.runAway());
     }
 
@@ -118,7 +118,7 @@ public class CairnRPGTests {
     @Test
     void testEnemyConstructorDefaults() {
         Enemy enemy = new Enemy(100.0f, 10.0f, true);
-        assertEquals("EnemyName", enemy.getName());
+        assertEquals("KillerBalloonDog", enemy.getName());
         assertEquals(30, enemy.getMagicPoints());
         assertTrue(enemy.info().contains("Magic Points"));
     }
@@ -142,7 +142,7 @@ public class CairnRPGTests {
     @Test
     void testBossConstructorAndInfo() {
         Boss boss = new Boss();
-        assertEquals("The Dark Overlord", boss.getName());
+        assertEquals("KillerClown", boss.getName());
         assertEquals(3, boss.getUltrasLeft());
         assertTrue(boss.info().contains("Ultras Left"));
     }

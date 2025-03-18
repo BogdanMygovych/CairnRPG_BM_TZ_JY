@@ -3,8 +3,8 @@ public class World {
     private String publisher;
 
     public World() {
-        this.gameName = "Default Game";
-        this.publisher = "Default Publisher";
+        this.gameName = "CairnRPG Game";
+        this.publisher = "Bogdan, Tykhyk, Jonah";
     }
 
     public String getGameName() {
