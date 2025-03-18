@@ -3,9 +3,9 @@ import java.util.List;
 import java.util.Random;
 
 public class Hero extends Character {
-    private int level;
-    private int experience;
-    private float money;
+    private static int level;
+    private static int experience;
+    private static float money;
     List<Item> inventory;
 
     public Hero (float health, float attackPower, boolean runAway){
@@ -19,10 +19,27 @@ public class Hero extends Character {
 
     // all function(s) for this class
     public boolean fight(Enemy enemy){
+        Random random = new Random();
+        if (random.nextDouble() < .1){ // 10% chance of missing the attack
+            System.out.println("Attack is missed");
+            return false;
+        }
+        boolean specialAttack = random.nextBoolean();
+        double damage;
+        if (specialAttack){
+            damage = Character.attackPower * 2;
+            //enemy.takeDamage(damage);
+            System.out.println(super.name + " attacked enemy with special attack by " + damage + " HP points.");
+        }else{
+            damage = Character.attackPower;
+            //enemy.takeDamage(damage);
+            System.out.println(super.name + " attacked enemy by " + damage + " HP points.");
+        }
+        return true;
 
     }
 
-    public void useItem(int){
+    public void useItem(){
         if (!inventory.isEmpty()){
             health += Item.getHealingPower();
             Item item = inventory.remove(0);
@@ -54,8 +71,8 @@ public class Hero extends Character {
         return inventoryList.toString();
     }
 
-    public String info(){
-        return "This is " + super.name + ". Health: " + super.health + ", level: " + level + ", experience: " + experience + ", money: " + money + ", attack power: " + super.attackPower + ".";
+    public static String info(){
+        return "This is " + name + ". Health: " + health + ", level: " + level + ", experience: " + experience + ", money: " + money + ", attack power: " + attackPower + ".";
     }
 
 
