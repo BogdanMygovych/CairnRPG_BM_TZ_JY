@@ -1,5 +1,5 @@
 public class Item {
-    private String name;
+    private static String name;
     private static int healingPower;
 
     public Item (String name, int healingPower){
@@ -8,14 +8,14 @@ public class Item {
     }
 
     // all function(s) for this class
-    public String info(){
+    public static String info(){
         return "This is " + name + " and its healing power is " + healingPower;
     }
 
 
 
     //Getters and setters
-    public String getName(){
+    public static String getName(){
         return name;
     }
 

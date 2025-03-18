@@ -3,9 +3,9 @@ import java.util.List;
 import java.util.Random;
 
 public class Hero extends Character {
-    private int level;
-    private int experience;
-    private float money;
+    private static int level;
+    private static int experience;
+    private static float money;
     List<Item> inventory;
 
     public Hero (float health, float attackPower, boolean runAway){
@@ -71,8 +71,8 @@ public class Hero extends Character {
         return inventoryList.toString();
     }
 
-    public String info(){
-        return "This is " + super.name + ". Health: " + super.health + ", level: " + level + ", experience: " + experience + ", money: " + money + ", attack power: " + super.attackPower + ".";
+    public static String info(){
+        return "This is " + name + ". Health: " + health + ", level: " + level + ", experience: " + experience + ", money: " + money + ", attack power: " + attackPower + ".";
     }
 
 

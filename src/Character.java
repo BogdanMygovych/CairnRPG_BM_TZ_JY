@@ -1,10 +1,10 @@
 import java.util.Random;
 
 public class Character {
-    protected String name;
-    protected double health;
+    protected static String name;
+    protected static double health;
     protected static double attackPower;
-    protected boolean isAlive;
+    protected static boolean isAlive;
 
     public Character(String name, double health, double attackPower, boolean isAlive) {
         this.name = name;
@@ -17,8 +17,9 @@ public class Character {
         return new Random().nextBoolean();
     }
 
-    public String info() {
+    public static String info() {
         return "Name: " + name + ", Health: " + health + ", Attack: " + attackPower + ", Alive: " + isAlive;
     }
+
 }
 
