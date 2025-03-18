@@ -11,6 +11,14 @@ public class Character {
         this.isAlive = isAlive;
     }
 
+    public void takeDamage(double damage) {
+    this.health -= damage;
+    if (this.health <= 0) {
+        this.health = 0;
+        this.isAlive = false;
+        System.out.println(name + " has been defeated.");
+    }
+}    
     public boolean runAway() {
         return new Random().nextBoolean();
     }
