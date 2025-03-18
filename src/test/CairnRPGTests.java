@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CairnRPGTests {
 
     @Test
-    void testWorldDefaults() {
-        World world = new World();
-        assertNotNull(world.info());
+    void testWorldCreation() {
+        World w = new World("My World", "Me");
+        assertNotNull(w);
     }
 
     @Test

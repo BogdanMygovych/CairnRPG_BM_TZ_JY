@@ -1,13 +1,26 @@
 public class World {
-    private String terrain;
-    private int difficulty;
+    private String gameName;
+    private String publisher;
 
-    public World() {
-        this.terrain = "Plains";
-        this.difficulty = 1;
+   public World(String gameName, String publisher) {
+        this.gameName = gameName;
+        this.publisher = publisher;
     }
 
-    public String info() {
-        return "Terrain: " + terrain + ", Difficulty: " + difficulty;
+    public String getGameName() {
+        return gameName;
+    }
+
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 }
+

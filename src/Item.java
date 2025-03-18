@@ -12,7 +12,7 @@ public class Item {
         return "This is " + name + " and its healing power is " + healingPower;
     }
 
-
+    
 
     //Getters and setters
     public String getName(){
