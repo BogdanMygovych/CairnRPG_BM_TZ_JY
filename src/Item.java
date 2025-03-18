@@ -1,6 +1,7 @@
 public class Item {
-    private static String name;
-    private static int healingPower;
+private String name;
+private int healingPower;
+
 
     public Item (String name, int healingPower){
         this.name = name;
@@ -15,17 +16,17 @@ public class Item {
     
 
     //Getters and setters
-    public static String getName(){
-        return name;
-    }
+    public String getName() {
+    return name;
+}
 
     public void setName(String name){
         this.name = name;
     }
 
-    public static int getHealingPower(){
-        return healingPower;
-    }
+public int getHealingPower() {
+    return healingPower;
+}
 
     public void setHealingPower( int healingPower){
         this.healingPower = healingPower;
