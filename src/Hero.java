@@ -40,6 +40,7 @@ public boolean fight(Enemy enemy) {
 }
 
 
+
 public void useItem() {
     if (!inventory.isEmpty()) {
         Item item = inventory.remove(0);
@@ -49,6 +50,7 @@ public void useItem() {
         System.out.println("Inventory is empty!");
     }
 }
+
 
 
     public void levelUp(){
