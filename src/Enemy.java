@@ -15,27 +15,27 @@ public class Enemy extends Character {
         this(100.0, 10.0, true);
     }
 
-    // Enemy attack
-    public void fight(Character target) {
-        if (!isAlive) {
-            System.out.println(name + " is already defeated and can't attack!");
-            return;
-        }
-
-        boolean useMagic = randomizer.nextDouble() < 0.3; // 30% for magic
-        double damage;
-
-        if (useMagic && magicPower >= 10) {
-            damage = attackPower * 1.5; //more damage for magic
-            magicPower -= 10; // worsen magic power
-            System.out.println(name + " casts a magic spell! Damage: " + damage);
-        } else { // Normal attack
-            damage = attackPower;
-            System.out.println(name + " attacks with a weapon! Damage: " + damage);
-        }
-
-        target.takeDamage(damage); // Apply damage to the target
+public void fight(Character target) {
+    if (!isAlive()) {
+        System.out.println(getName() + " is already defeated and can't attack!");
+        return;
     }
+
+    boolean useMagic = randomizer.nextDouble() < 0.3; // 30% for magic
+    double damage;
+
+    if (useMagic && magicPower >= 10) {
+        damage = getAttackPower() * 1.5; // More damage for magic
+        magicPower -= 10; // Reduce magic power
+        System.out.println(getName() + " casts a magic spell! Damage: " + damage);
+    } else { // Normal attack
+        damage = getAttackPower();
+        System.out.println(getName() + " attacks with a weapon! Damage: " + damage);
+    }
+
+    target.takeDamage(damage); // Apply damage to the target
+}
+
 
     // Display enemy details
     public String info() {
