@@ -10,16 +10,17 @@ public class CairnRPGTests {
     }
 
     @Test
-    void testItemCreationAndInfo() {
-
-    }
-
-    @Test
     void testCharacterRunAway() {
         Character c = new Character("Max", 100, 10, true);
         boolean result = c.runAway(); // true/false
         assertNotNull(result);
     }
+
+    @Test
+    void testItemCreationAndInfo() {
+
+    }
+
 
     @Test
     void testHeroLevelUp() {
