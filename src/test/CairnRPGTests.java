@@ -58,4 +58,12 @@ public class CairnRPGTests {
 
 
     }
+        @Test
+    void testEnemyCreation() {
+        Enemy enemy = new Enemy(100.0, 10.0, true);  // Creating an enemy
+        assertEquals("Enemy", enemy.getName(), "Enemy name should be 'Enemy'");
+        assertEquals(100.0, enemy.getHealth(), 0.01, "Enemy health should be 100");
+        assertEquals(10.0, enemy.getAttackPower(), 0.01, "Enemy attack power should be 10");
+        assertTrue(enemy.getIsAlive(), "Enemy should be alive when created");
+    }
 }
