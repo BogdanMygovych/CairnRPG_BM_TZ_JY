@@ -17,37 +17,39 @@ public class Hero extends Character {
         this.inventory.add(new Item("Potion", 20));
     }
 
-    // all function(s) for this class
-    public boolean fight(Enemy enemy){
-        Random random = new Random();
-        if (random.nextDouble() < .1){ // 10% chance of missing the attack
-            System.out.println("Attack is missed");
-            return false;
-        }
-        boolean specialAttack = random.nextBoolean();
-        double damage;
-        if (specialAttack){
-            damage = Character.attackPower * 2;
-            //enemy.takeDamage(damage);
-            System.out.println(super.name + " attacked enemy with special attack by " + damage + " HP points.");
-        }else{
-            damage = Character.attackPower;
-            //enemy.takeDamage(damage);
-            System.out.println(super.name + " attacked enemy by " + damage + " HP points.");
-        }
-        return true;
-
+public boolean fight(Enemy enemy) {
+    Random random = new Random();
+    if (random.nextDouble() < 0.1) { // 10% chance of missing the attack
+        System.out.println("Attack is missed");
+        return false;
     }
 
-    public void useItem(){
-        if (!inventory.isEmpty()){
-            health += Item.getHealingPower();
-            Item item = inventory.remove(0);
-            System.out.println("A potion healed " + super.name + " by " + Item.getHealingPower() + "HP.");
-        } else {
-            System.out.println("Inventory is empty!");
-        }
+    boolean specialAttack = random.nextBoolean();
+    double damage;
+
+    if (specialAttack) {
+        damage = getAttackPower() * 2;
+        System.out.println(getName() + " attacked enemy with special attack by " + damage + " HP points.");
+    } else {
+        damage = getAttackPower();
+        System.out.println(getName() + " attacked enemy by " + damage + " HP points.");
     }
+
+    enemy.takeDamage(damage);
+    return true;
+}
+
+
+public void useItem() {
+    if (!inventory.isEmpty()) {
+        Item item = inventory.remove(0);
+        setHealth(getHealth() + item.getHealingPower());
+        System.out.println("A potion healed " + getName() + " by " + item.getHealingPower() + " HP.");
+    } else {
+        System.out.println("Inventory is empty!");
+    }
+}
+
 
     public void levelUp(){
         if(experience >= 100){
