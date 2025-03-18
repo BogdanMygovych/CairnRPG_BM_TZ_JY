@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 public class Item {
     private String name;
     private static int healingPower;
@@ -33,4 +31,3 @@ public class Item {
         this.healingPower = healingPower;
     }
 }
->>>>>>> Stashed changes
