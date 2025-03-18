@@ -15,6 +15,7 @@ public class Hero extends Character {
         this.inventory[0] = new Item("Potion", 20);
     }
 
+    // function(s) for this class
     public boolean fight(Enemy enemy) {
         Random rand = new Random();
         boolean useSpecial = rand.nextBoolean();
@@ -76,7 +77,7 @@ public class Hero extends Character {
     }
 
 
-
+    // getters and setters
     public int getLevel() {
         return level;
     }

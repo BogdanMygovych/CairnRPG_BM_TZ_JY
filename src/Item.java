@@ -24,6 +24,7 @@ public class Item {
         this.healingPower = healingPower;
     }
 
+    // function(s) for this class
     public String info() {
         return "Item: " + name + ", Heals: " + healingPower;
     }
