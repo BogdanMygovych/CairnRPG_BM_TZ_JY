@@ -144,7 +144,7 @@ public class CairnRPGTests {
         Boss boss = new Boss();
         assertEquals("KillerClown", boss.getName());
         assertEquals(3, boss.getUltrasLeft());
-        assertTrue(boss.info().contains("Ultras Left"));
+        assertTrue(boss.info().contains("Primaries Left"));
     }
 
     @Test
