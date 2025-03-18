@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class Character {
     private String name;
     private float health;
@@ -13,22 +11,52 @@ public class Character {
         this.isAlive = isAlive;
     }
 
+    public void takeDamage(double damage) {
+    this.health -= damage;
+    if (this.health <= 0) {
+        this.health = 0;
+        this.isAlive = false;
+        System.out.println(name + " has been defeated.");
+    }
+}    
     public boolean runAway() {
         return new Random().nextBoolean();
     }
 
     public String info() {
-        return "Name: " + name + ", Health: " + health + ", Attack Power: " + attackPower + ", Alive: " + isAlive;
+        return "Character: " + name + ", Health: " + health + ", Attack: " + attackPower + ", Alive: " + isAlive;
     }
 
     // Getters and Setters
-    public String getName() { return name; }
-    public float getHealth() { return health; }
-    public float getAttackPower() { return attackPower; }
-    public boolean getIsAlive() { return isAlive; }
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String name) { this.name = name; }
-    public void setHealth(float health) { this.health = health; }
-    public void setAttackPower(float attackPower) { this.attackPower = attackPower; }
-    public void setIsAlive(boolean isAlive) { this.isAlive = isAlive; }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public float getHealth() {
+        return health;
+    }
+
+    public void setHealth(float health) {
+        this.health = health;
+    }
+
+    public float getAttackPower() {
+        return attackPower;
+    }
+
+    public void setAttackPower(float attackPower) {
+        this.attackPower = attackPower;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
 }
