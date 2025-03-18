@@ -1,8 +1,18 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CairnRPGTests {
+    private Enemy enemy;
+    private Character hero;
 
+    @BeforeEach
+    void setUp() {
+        enemy = new Enemy(100.0, 10.0, true);
+        hero = new Character("Hero", 120.0, 15.0, true);
+    }
+
+    
     @Test
     void testWorldDefaults() {
         World world = new World();
